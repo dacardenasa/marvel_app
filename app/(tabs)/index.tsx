@@ -35,7 +35,7 @@ export default function HomeScreen() {
         <Typography type="title" style={{ fontFamily: "Star-Shield" }}>
           Welcome to
         </Typography>
-        <Typography type="title" style={{ color: "#E62429" }}>
+        <Typography type="title" style={{ color: "#E53034" }}>
           MARVEL COMICS
         </Typography>
       </Box>

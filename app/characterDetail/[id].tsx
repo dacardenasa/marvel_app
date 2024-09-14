@@ -32,7 +32,7 @@ const CharacterDetail = () => {
   if (error || comicsError) {
     return (
       <Container style={styles.container}>
-        <Typography type="title" style={{ color: "red" }}>
+        <Typography type="title" style={{ color: "#E53034" }}>
           {error?.message ?? comicsError?.message ?? "Undefined error!"}
         </Typography>
       </Container>
@@ -63,16 +63,16 @@ const CharacterDetail = () => {
         ) : (
           <>
             <Box style={{ columnGap: 8 }}>
-              <Typography type="title" style={{ color: "red" }}>Character name:</Typography>
+              <Typography type="title" style={{ color: "#E53034" }}>Character name:</Typography>
               <Typography>{character?.name}</Typography>
             </Box>
             <Box style={{ columnGap: 8 }}>
-              <Typography type="title" style={{ color: "red" }}>Bio:</Typography>
+              <Typography type="title" style={{ color: "#E53034" }}>Bio:</Typography>
               <Typography>{character?.description}</Typography>
             </Box>
           </>
         )}
-        <Typography type="title" style={{ color: "red" }}>Comics:</Typography>
+        <Typography type="title" style={{ color: "#E53034" }}>Comics:</Typography>
         <FlatList
           contentContainerStyle={{ columnGap: 16 }}
           data={comics}

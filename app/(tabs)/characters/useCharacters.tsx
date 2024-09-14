@@ -39,7 +39,7 @@ export const useCharacters = () => {
         handlePressCard={() => router.push(`/characterDetail/${item.id}`)}
       >
         <Box style={styles.informationBox}>
-          <Typography numberOfLines={1} lightColor="white">{item.name}</Typography>
+          <Typography numberOfLines={1} type="subtitle" lightColor="white">{item.name}</Typography>
           <Typography numberOfLines={1}>{item.description}</Typography>
         </Box>
       </ComicCard>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   informationBox: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: "#9F0313",
+    backgroundColor: "#E53034",
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8
   }

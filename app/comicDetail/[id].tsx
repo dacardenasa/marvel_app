@@ -74,7 +74,7 @@ const ComicDetail = () => {
           <ComicInfoSkeleton />
         ) : (
           <>
-            <Typography type="title" style={{ color: "red" }}>{data?.title}</Typography>
+            <Typography type="title" style={{ color: "#E53034" }}>{data?.title}</Typography>
             <ComicInfo
               pageCount={data?.pageCount ?? "Unknown"}
               synopsis={data?.synopsis ?? ""}
@@ -82,7 +82,7 @@ const ComicDetail = () => {
             />
           </>
         )}
-        <Typography type="subtitle" style={{ color: "red" }}>Comic prices:</Typography>
+        <Typography type="subtitle" style={{ color: "#E53034" }}>Comic prices:</Typography>
         <FlatList
           contentContainerStyle={{ columnGap: 16 }}
           data={data?.prices}
@@ -96,7 +96,7 @@ const ComicDetail = () => {
           }
           horizontal
         />
-        <Typography type="subtitle" style={{ color: "red" }}>Comic creators:</Typography>
+        <Typography type="subtitle" style={{ color: "#E53034" }}>Comic creators:</Typography>
         <FlatList
           contentContainerStyle={{ columnGap: 16 }}
           data={data?.creators}
@@ -110,7 +110,7 @@ const ComicDetail = () => {
           }
           horizontal
         />
-        <Typography type="subtitle" style={{ color: "red" }}>Comic Preview:</Typography>
+        <Typography type="subtitle" style={{ color: "#E53034" }}>Comic Preview:</Typography>
         <FlatList
           contentContainerStyle={{ columnGap: 16 }}
           data={data?.comicImages}
@@ -124,7 +124,7 @@ const ComicDetail = () => {
           }
           horizontal
         />
-        <Typography type="subtitle" style={{ color: "red" }}>Characters:</Typography>
+        <Typography type="subtitle" style={{ color: "#E53034" }}>Characters:</Typography>
         <FlatList
           contentContainerStyle={{ columnGap: 16 }}
           data={characters}
@@ -147,7 +147,7 @@ const ComicDetail = () => {
           horizontal
         />
       </ParallaxScrollView>
-      <React.Suspense fallback={<Typography>Loading...</Typography>}>
+      <React.Suspense>
         <ComicModal
           isVisible={isModalOpen}
           source={comicURI ?? ""}
