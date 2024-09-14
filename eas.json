@@ -1,0 +1,41 @@
+{
+  "cli": {
+    "version": ">= 5.9.1"
+  },
+  "build": {
+    "preview": {
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://gateway.marvel.com:443/v1/public",
+        "EXPO_PUBLIC_API_KEY": "666290ede96a6826955e67d93a54c98f",
+        "EXPO_PRIVATE_API_KEY": "be8f5c2d3cc14de2e883741667d2afccd0e2a0d2",
+        "EXPO_PUBLIC_API_HASH": "56c3668c28a22cbf3944c2f50b7e2096"
+      }
+    },
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "staging": {
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://gateway.marvel.com:443/v1/public",
+        "EXPO_PUBLIC_API_KEY": "666290ede96a6826955e67d93a54c98f",
+        "EXPO_PRIVATE_API_KEY": "be8f5c2d3cc14de2e883741667d2afccd0e2a0d2",
+        "EXPO_PUBLIC_API_HASH": "56c3668c28a22cbf3944c2f50b7e2096"
+      }
+    },
+    "production": {
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://gateway.marvel.com:443/v1/public",
+        "EXPO_PUBLIC_API_KEY": "666290ede96a6826955e67d93a54c98f",
+        "EXPO_PRIVATE_API_KEY": "be8f5c2d3cc14de2e883741667d2afccd0e2a0d2",
+        "EXPO_PUBLIC_API_HASH": "56c3668c28a22cbf3944c2f50b7e2096"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

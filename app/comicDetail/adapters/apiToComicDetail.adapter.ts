@@ -1,4 +1,6 @@
 import { Comic } from "@/models";
+import { parsedURLImage } from "@/utils";
+
 import { ComicDetailAdapter } from "../models";
 
 export function apiToComicDetail(comicDetail: Comic[]): ComicDetailAdapter[] {
@@ -17,12 +19,14 @@ export function apiToComicDetail(comicDetail: Comic[]): ComicDetailAdapter[] {
     {
       title,
       synopsis: textObjects[0]?.text ?? "Synopsis is not available",
-      thumbnail: `${thumbnail.path}.${thumbnail.extension}`,
+      thumbnail: parsedURLImage(thumbnail.path, thumbnail.extension),
       format: !!format ? format : "Unknown",
       pageCount: !!pageCount ? pageCount : "Unknown",
       prices,
       creators: [...creators.items],
-      comicImages: images.map((image) => `${image.path}.${image.extension}`)
+      comicImages: images.map((image) =>
+        parsedURLImage(image.path, image.extension)
+      )
     }
   ];
 }
