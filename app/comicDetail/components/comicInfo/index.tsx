@@ -11,12 +11,12 @@ type ComicInfoProps = Pick<
 const _ComicInfo = ({ synopsis, format, pageCount }: ComicInfoProps) => {
   return (
     <>
-      <Typography type="title" style={{ color: "red" }}>Synopsis</Typography>
+      <Typography type="title" style={{ color: "#E53034" }}>Synopsis</Typography>
       <Typography>{synopsis}</Typography>
-      <Typography type="subtitle" style={{ color: "red" }}>
+      <Typography type="subtitle" style={{ color: "#E53034" }}>
         Format: <Typography>{format}</Typography>
       </Typography>
-      <Typography type="subtitle" style={{ color: "red" }}>
+      <Typography type="subtitle" style={{ color: "#E53034" }}>
         Pages number: <Typography>{pageCount}</Typography>
       </Typography>
     </>

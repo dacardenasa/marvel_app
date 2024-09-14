@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   informationBox: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: "#9F0313",
+    backgroundColor: "#E53034",
     borderBottomLeftRadius: 8,
     borderBottomRightRadius: 8
   }
