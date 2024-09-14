@@ -12,8 +12,20 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarActiveTintColor: "#E53034",
         headerShown: false,
+        tabBarStyle: {
+          position: "absolute",
+          bottom: 8,
+          left: 16,
+          right: 16,
+          backgroundColor: "white",
+          height: 65,
+          borderRadius: 16,
+          elevation: 0,
+          alignItems: "center",
+          justifyContent: "center"
+        }
       }}
     >
       <Tabs.Screen
@@ -46,7 +58,7 @@ export default function TabLayout() {
           title: "Characters",
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon
-              name={focused ? "albums" : "albums-outline"}
+              name={focused ? "person" : "person-outline"}
               color={color}
             />
           )
