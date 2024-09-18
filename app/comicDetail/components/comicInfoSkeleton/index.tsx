@@ -7,7 +7,7 @@ import { SkeletonBox, Typography } from "@/components";
 const _ComicInfoSkeleton = () => {
   return (
     <>
-      <Typography type="title" style={{ color: "red" }}>Synopsis</Typography>
+      <Typography type="title" style={{ color: "#E53034" }}>Synopsis</Typography>
       {[1, 2, 3, 4, 5].map((_) => (
         <SkeletonBox
           key={uuid.v4().toString()}
@@ -17,7 +17,7 @@ const _ComicInfoSkeleton = () => {
         />
       ))}
       <SkeletonBox width="90%" height={15} borderRadius={8} />
-      <Typography type="subtitle" style={{ color: "red" }}>
+      <Typography type="subtitle" style={{ color: "#E53034" }}>
         Format:{" "}
         <SkeletonBox
           width={100}
@@ -26,7 +26,7 @@ const _ComicInfoSkeleton = () => {
           borderRadius={8}
         />
       </Typography>
-      <Typography type="subtitle" style={{ color: "red" }}>
+      <Typography type="subtitle" style={{ color: "#E53034" }}>
         Pages number:{" "}
         <SkeletonBox width={50} height={15} marginBottom={4} borderRadius={8} />
       </Typography>

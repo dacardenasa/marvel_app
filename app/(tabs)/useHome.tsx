@@ -45,10 +45,25 @@ export const useHome = () => {
         handlePressCard={() => router.push(`/comicDetail/${item.id}`)}
       >
         <Box style={styles.informationBox}>
-          <Typography numberOfLines={1} type="subtitle">{item.title}</Typography>
+          <Typography
+            numberOfLines={1}
+            type="subtitle"
+            darkColor="white"
+            lightColor="white"
+          >
+            {item.title}
+          </Typography>
           <Box style={{ flexDirection: "row", backgroundColor: "transparent" }}>
-            <Typography type="defaultSemiBold">Price: </Typography>
-            <Typography>${item.price}</Typography>
+            <Typography
+              darkColor="white"
+              lightColor="white"
+              type="defaultSemiBold"
+            >
+              Price:{" "}
+            </Typography>
+            <Typography darkColor="white" lightColor="white">
+              ${item.price}
+            </Typography>
           </Box>
         </Box>
       </ComicCard>
@@ -63,14 +78,22 @@ export const useHome = () => {
         handlePressCard={() => router.push(`/characterDetail/${item.id}`)}
       >
         <Box style={styles.informationBox}>
-          <Typography numberOfLines={1} type="subtitle">{item.name}</Typography>
+          <Typography
+            darkColor="white"
+            lightColor="white"
+            numberOfLines={1}
+            type="subtitle"
+          >
+            {item.name}
+          </Typography>
         </Box>
       </ComicCard>
     </Box>
   );
 
   const keyExtractor = (item: HomeComicsMaped) => item.id.toString();
-  const keyCharacterExtractor = (item: HomeCharacterMapped) => item.id.toString();
+  const keyCharacterExtractor = (item: HomeCharacterMapped) =>
+    item.id.toString();
 
   useFocusEffect(
     React.useCallback(() => {

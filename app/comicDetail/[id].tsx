@@ -44,7 +44,7 @@ const ComicDetail = () => {
   if (error || charactersError) {
     return (
       <Container style={styles.container}>
-        <Typography type="title" style={{ color: "red" }}>
+        <Typography type="title" style={{ color: "#E53034" }}>
           {error?.message ?? charactersError?.message}
         </Typography>
       </Container>

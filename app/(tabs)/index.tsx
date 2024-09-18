@@ -20,7 +20,7 @@ export default function HomeScreen() {
 
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+      headerBackgroundColor={{ light: "black", dark: "white" }}
       headerImage={
         <Image
           source={require("@/assets/images/marvel-background.png")}
@@ -79,6 +79,7 @@ export default function HomeScreen() {
         }
         horizontal
       />
+      <Box style={{ height: 100 }} />
     </ParallaxScrollView>
   );
 }

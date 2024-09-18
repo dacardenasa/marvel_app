@@ -10,7 +10,7 @@ type ErrorViewProps = {
 export const ErrorView = ({ message }: ErrorViewProps) => {
   return (
     <Container style={styles.container}>
-      <Typography type="title" style={{ color: "red" }}>
+      <Typography type="title" style={{ color: "#E53034" }}>
         {message}
       </Typography>
     </Container>

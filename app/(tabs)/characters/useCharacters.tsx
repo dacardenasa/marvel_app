@@ -39,8 +39,8 @@ export const useCharacters = () => {
         handlePressCard={() => router.push(`/characterDetail/${item.id}`)}
       >
         <Box style={styles.informationBox}>
-          <Typography numberOfLines={1} type="subtitle" lightColor="white">{item.name}</Typography>
-          <Typography numberOfLines={1}>{item.description}</Typography>
+          <Typography darkColor="white" lightColor="white" numberOfLines={1} type="subtitle">{item.name}</Typography>
+          <Typography darkColor="white" lightColor="white" numberOfLines={1}>{item.description}</Typography>
         </Box>
       </ComicCard>
     </Box>
