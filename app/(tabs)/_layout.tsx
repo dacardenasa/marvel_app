@@ -1,15 +1,12 @@
 import React from "react";
 import { Platform, StyleSheet } from "react-native";
 
-// import { Tabs } from "expo-router";
-
-import { TabBarIcon } from "@/components/navigation";
-import { Box, Typography } from "@/components";
-
 import { SearchProvider } from "./context/search.provider";
 import { useThemeColor } from "@/hooks/useThemeColor";
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { TabBarButton } from "./components";
+
 import HomeScreen from ".";
 import Comics from "./comics";
 import Characters from "./characters";
@@ -42,21 +39,11 @@ export default function TabLayout() {
           options={{
             title: "Home",
             tabBarIcon: ({ color, focused }) => (
-              <Box
-                darkColor="transparent"
-                lightColor="transparent"
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  ...(Platform.OS === "ios" ? { top: 16 } : {})
-                }}
-              >
-                <TabBarIcon
-                  name={focused ? "home" : "home-outline"}
-                  color={color}
-                />
-                <Typography style={{ color }}>Home</Typography>
-              </Box>
+              <TabBarButton
+                color={color}
+                label="Home"
+                name={focused ? "home" : "home-outline"}
+              />
             )
           }}
         />
@@ -66,21 +53,11 @@ export default function TabLayout() {
           options={{
             title: "Comics",
             tabBarIcon: ({ color, focused }) => (
-              <Box
-                darkColor="transparent"
-                lightColor="transparent"
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  ...(Platform.OS === "ios" ? { top: 16 } : {})
-                }}
-              >
-                <TabBarIcon
-                  name={focused ? "book" : "book-outline"}
-                  color={color}
-                />
-                <Typography style={{ color }}>Comics</Typography>
-              </Box>
+              <TabBarButton
+                color={color}
+                label="Comics"
+                name={focused ? "book" : "book-outline"}
+              />
             )
           }}
         />
@@ -90,21 +67,11 @@ export default function TabLayout() {
           options={{
             title: "Characters",
             tabBarIcon: ({ color, focused }) => (
-              <Box
-                darkColor="transparent"
-                lightColor="transparent"
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  ...(Platform.OS === "ios" ? { top: 16 } : {})
-                }}
-              >
-                <TabBarIcon
-                  name={focused ? "person" : "person-outline"}
-                  color={color}
-                />
-                <Typography style={{ color }}>Characters</Typography>
-              </Box>
+              <TabBarButton
+                color={color}
+                label="Characters"
+                name={focused ? "person" : "person-outline"}
+              />
             )
           }}
         />
@@ -114,21 +81,11 @@ export default function TabLayout() {
           options={{
             title: "Search",
             tabBarIcon: ({ color, focused }) => (
-              <Box
-                darkColor="transparent"
-                lightColor="transparent"
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center",
-                  ...(Platform.OS === "ios" ? { top: 16 } : {})
-                }}
-              >
-                <TabBarIcon
-                  name={focused ? "search" : "search-outline"}
-                  color={color}
-                />
-                <Typography style={{ color }}>Search</Typography>
-              </Box>
+              <TabBarButton
+                color={color}
+                label="Search"
+                name={focused ? "search" : "search-outline"}
+              />
             )
           }}
         />
