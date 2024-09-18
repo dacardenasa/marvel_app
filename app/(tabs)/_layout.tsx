@@ -1,13 +1,21 @@
 import React from "react";
 import { Platform, StyleSheet } from "react-native";
 
-import { Tabs } from "expo-router";
+// import { Tabs } from "expo-router";
 
 import { TabBarIcon } from "@/components/navigation";
 import { Box, Typography } from "@/components";
 
 import { SearchProvider } from "./context/search.provider";
 import { useThemeColor } from "@/hooks/useThemeColor";
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeScreen from ".";
+import Comics from "./comics";
+import Characters from "./characters";
+import Search from "./search";
+
+const Tab = createBottomTabNavigator();
 
 export default function TabLayout() {
   const bgColor = useThemeColor(
@@ -16,7 +24,7 @@ export default function TabLayout() {
   );
   return (
     <SearchProvider>
-      <Tabs
+      <Tab.Navigator
         screenOptions={{
           tabBarActiveTintColor: "#E53034",
           headerShown: false,
@@ -28,8 +36,9 @@ export default function TabLayout() {
           tabBarShowLabel: false
         }}
       >
-        <Tabs.Screen
-          name="index"
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
           options={{
             title: "Home",
             tabBarIcon: ({ color, focused }) => (
@@ -51,8 +60,9 @@ export default function TabLayout() {
             )
           }}
         />
-        <Tabs.Screen
-          name="comics/index"
+        <Tab.Screen
+          name="comics"
+          component={Comics}
           options={{
             title: "Comics",
             tabBarIcon: ({ color, focused }) => (
@@ -74,8 +84,9 @@ export default function TabLayout() {
             )
           }}
         />
-        <Tabs.Screen
-          name="characters/index"
+        <Tab.Screen
+          name="characters"
+          component={Characters}
           options={{
             title: "Characters",
             tabBarIcon: ({ color, focused }) => (
@@ -97,8 +108,9 @@ export default function TabLayout() {
             )
           }}
         />
-        <Tabs.Screen
-          name="search/index"
+        <Tab.Screen
+          name="search"
+          component={Search}
           options={{
             title: "Search",
             tabBarIcon: ({ color, focused }) => (
@@ -120,7 +132,7 @@ export default function TabLayout() {
             )
           }}
         />
-      </Tabs>
+      </Tab.Navigator>
     </SearchProvider>
   );
 }
