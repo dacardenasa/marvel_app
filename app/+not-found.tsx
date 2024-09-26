@@ -1,4 +1,5 @@
-import { Box, Typography } from '@/components';
+import React from 'react';
+import { Box, Typography } from '@/shared/infrastructure/components';
 import { Link, Stack } from 'expo-router';
 import { StyleSheet } from 'react-native';
 
@@ -8,7 +9,7 @@ export default function NotFoundScreen() {
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
       <Box style={styles.container}>
-        <Typography type="title">This screen doesn't exist.</Typography>
+        <Typography type="title">This screen does not exist.</Typography>
         <Link href="/" style={styles.link}>
           <Typography type="link">Go to home screen!</Typography>
         </Link>

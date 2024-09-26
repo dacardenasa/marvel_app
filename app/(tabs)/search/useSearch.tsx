@@ -1,23 +1,24 @@
-import { useContext, useMemo, useState } from "react";
+import React, { useCallback, useContext, useMemo, useState } from "react";
 import { StyleSheet } from "react-native";
 import { router } from "expo-router";
 
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { QueryKey, useInfiniteQuery } from "@tanstack/react-query";
 
-import { Box, ComicCard, Typography } from "@/components";
+import { Box, ComicCard, Typography } from "@/shared/infrastructure/components";
 
-import { SearchContext } from "../context/search.context";
+import { createAxiosRepository } from "./infrastructure/axios.repository";
+import { createComicsService } from "./application/comics";
+import { createCharactersService } from "./application/characters";
+import { SearchBy, SearchCategories } from "./domain/search";
+import { SearchContext } from "../infrastructure/context/search.context";
+import { apiToComics } from "./infrastructure/adapters/apiToComics.adapter";
+import { apiToCharacters } from "./infrastructure/adapters/apiToCharacters.adapter";
+import { MarvelCharacter } from "./domain/character";
+import { MarvelComic } from "./domain/comic";
 
-import {
-  CharacterMapped,
-  ComicMapped,
-  SearchBy,
-  SearchCategories
-} from "./models";
-import { comicsAPI } from "./services/comics/comics.api";
-import { apiToComics } from "./adapters/apiToComics.adapter";
-import { charactersAPI } from "./services/characters/characters.api";
-import { apiToCharacters } from "./adapters/apiToCharacters.adapter";
+const repository = createAxiosRepository();
+const comicsService = createComicsService(repository);
+const charactersService = createCharactersService(repository);
 
 export const useSearch = () => {
   const [searchBy, setSearchBy] = useState<SearchBy>(SearchCategories.comics);
@@ -25,13 +26,13 @@ export const useSearch = () => {
 
   const { charactersValue, comicsValue } = useContext(SearchContext);
 
-  const handleSearchBy = (searchType: SearchBy) => {
+  const handleSearchBy = useCallback((searchType: SearchBy) => {
     setSearchBy(searchType);
-  };
+  }, []);
 
-  const handleToggleModal = () => {
+  const handleToggleModal = useCallback(() => {
     setIsOpenModal((prev) => !prev);
-  };
+  }, []);
 
   const {
     data: comicsData,
@@ -42,7 +43,16 @@ export const useSearch = () => {
     isFetchingNextPage: isFetchingNextPageComics
   } = useInfiniteQuery({
     queryKey: ["search-infiniteComics", comicsValue],
-    queryFn: comicsAPI.fetchInfiniteComics,
+    queryFn: ({
+      pageParam = 0,
+      queryKey
+    }: {
+      pageParam: number;
+      queryKey: QueryKey;
+    }) => {
+      const [, titleStartsWith] = queryKey;
+      return comicsService.getComics(pageParam, titleStartsWith as string);
+    },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       return lastPage.offset < lastPage.total
@@ -65,7 +75,19 @@ export const useSearch = () => {
     isFetchingNextPage
   } = useInfiniteQuery({
     queryKey: ["search-characters", charactersValue],
-    queryFn: charactersAPI.fetchInfiniteCharacters,
+    queryFn: ({
+      pageParam = 0,
+      queryKey
+    }: {
+      pageParam: number;
+      queryKey: QueryKey;
+    }) => {
+      const [, nameStartsWith] = queryKey;
+      return charactersService.getCharacters(
+        pageParam,
+        nameStartsWith as string
+      );
+    },
     initialPageParam: 0,
     getNextPageParam: (lastPage) => {
       return lastPage.offset < lastPage.total
@@ -81,7 +103,7 @@ export const useSearch = () => {
     enabled: false
   });
 
-  const renderCharacterItem = ({ item }: { item: CharacterMapped }) => (
+  const renderCharacterItem = ({ item }: { item: MarvelCharacter }) => (
     <Box style={styles.halfBox}>
       <ComicCard
         id={item.id}
@@ -105,13 +127,13 @@ export const useSearch = () => {
     </Box>
   );
 
-  const keyExtractorCharacters = (item: CharacterMapped) => item.id.toString();
+  const keyExtractorCharacters = (item: MarvelCharacter) => item.id.toString();
 
   const fetchMoreCharactersData = () => {
     if (hasNextPage && !isFetchingNextPage) fetchNextPage();
   };
 
-  const renderComicItem = ({ item }: { item: ComicMapped }) => (
+  const renderComicItem = ({ item }: { item: MarvelComic }) => (
     <Box style={styles.halfBox}>
       <ComicCard
         id={item.id}
@@ -135,7 +157,7 @@ export const useSearch = () => {
     </Box>
   );
 
-  const keyExtractorComic = (item: ComicMapped) => item.id.toString();
+  const keyExtractorComic = (item: MarvelComic) => item.id.toString();
 
   const fetchMoreDataComics = () => {
     if (hasNextPageComics && !isFetchingNextPageComics) fetchNextPageComics();

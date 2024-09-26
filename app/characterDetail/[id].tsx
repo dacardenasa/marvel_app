@@ -11,10 +11,10 @@ import {
   ListEmpty,
   ParallaxScrollView,
   Typography
-} from "@/components";
+} from "@/shared/infrastructure/components";
 
-import { useCharacterDetail } from "./useCharacterDetail";
-import { CharacterInfoSkeleton, ThumbnailsSkeletons } from "./components";
+import { useCharacterDetail } from "./infrastructure/useCharacterDetail";
+import { CharacterInfoSkeleton, ThumbnailsSkeletons } from "./infrastructure/components";
 
 const CharacterDetail = () => {
   const navigation = useNavigation();
@@ -63,16 +63,22 @@ const CharacterDetail = () => {
         ) : (
           <>
             <Box style={{ columnGap: 8 }}>
-              <Typography type="title" style={{ color: "#E53034" }}>Character name:</Typography>
+              <Typography type="title" style={{ color: "#E53034" }}>
+                Character name:
+              </Typography>
               <Typography>{character?.name}</Typography>
             </Box>
             <Box style={{ columnGap: 8 }}>
-              <Typography type="title" style={{ color: "#E53034" }}>Bio:</Typography>
+              <Typography type="title" style={{ color: "#E53034" }}>
+                Bio:
+              </Typography>
               <Typography>{character?.description}</Typography>
             </Box>
           </>
         )}
-        <Typography type="title" style={{ color: "#E53034" }}>Comics:</Typography>
+        <Typography type="title" style={{ color: "#E53034" }}>
+          Comics:
+        </Typography>
         <FlatList
           contentContainerStyle={{ columnGap: 16 }}
           data={comics}

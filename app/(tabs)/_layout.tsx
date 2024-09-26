@@ -1,18 +1,26 @@
 import React from "react";
 import { Platform, StyleSheet } from "react-native";
 
-import { SearchProvider } from "./context/search.provider";
-import { useThemeColor } from "@/hooks/useThemeColor";
-
+import { useThemeColor } from "@/shared/infrastructure/hooks";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { TabBarButton } from "./components";
+
+import { TabBarButton } from "./infrastructure/components";
+import { SearchProvider } from "./infrastructure/context/search.provider";
+
 
 import HomeScreen from ".";
 import Comics from "./comics";
 import Characters from "./characters";
 import Search from "./search";
 
-const Tab = createBottomTabNavigator();
+export type CreateBottomTabNavigatorParams = {
+  Home: undefined,
+  comics: undefined,
+  characters: undefined,
+  search: undefined
+}
+
+const Tab = createBottomTabNavigator<CreateBottomTabNavigatorParams>();
 
 export default function TabLayout() {
   const bgColor = useThemeColor(

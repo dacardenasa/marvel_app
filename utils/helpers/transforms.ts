@@ -1,4 +1,4 @@
-import { Extension } from "@/models/global";
+import { Extension } from "@/shared/domain";
 
 export const parsedURLImage = (thumbnail: string, extension: Extension) => {
   const [protocol, url] = thumbnail.split(":");

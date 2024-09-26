@@ -1,5 +1,5 @@
 import "react-native-reanimated";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   DarkTheme,
   DefaultTheme,
@@ -11,7 +11,8 @@ import { Stack } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import * as SplashScreen from "expo-splash-screen";
 
-import { useColorScheme } from "@/hooks/useColorScheme";
+import startShieldFont from "../assets/fonts/StarShieldRegular.ttf";
+import { useColorScheme } from "@/shared/infrastructure/hooks/useColorScheme";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -21,7 +22,7 @@ const queryClient = new QueryClient();
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
-    'Star-Shield': require("../assets/fonts/StarShieldRegular.ttf")
+    "Star-Shield": startShieldFont
   });
 
   useEffect(() => {
@@ -39,8 +40,14 @@ export default function RootLayout() {
       <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="comicDetail/[id]" options={{ headerShown: false }} />
-          <Stack.Screen name="characterDetail/[id]" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="comicDetail/[id]"
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="characterDetail/[id]"
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="+not-found" />
         </Stack>
       </ThemeProvider>

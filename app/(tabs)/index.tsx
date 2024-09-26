@@ -1,15 +1,27 @@
-import { Box, ListEmpty, ParallaxScrollView, Typography } from "@/components";
+import React from "react";
 import { StyleSheet, FlatList } from "react-native";
-import { useHome } from "./useHome";
-import { router } from "expo-router";
-import { ListCardSkeleton, WatchMoreCard } from "./components";
+import { useNavigation } from "expo-router";
 import { Image } from "expo-image";
 
+import {
+  Box,
+  ListEmpty,
+  ParallaxScrollView,
+  Typography
+} from "@/shared/infrastructure/components";
+import marvelBgIcon from "@/assets/images/marvel-background.png";
+
+import { ListCardSkeleton, WatchMoreCard } from "./infrastructure/components";
+import { useHome } from "./useHome";
+import { NativeStackNavigationProp } from "react-native-screens/lib/typescript/native-stack/types";
+import { CreateBottomTabNavigatorParams } from "./_layout";
+
 export default function HomeScreen() {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<CreateBottomTabNavigatorParams>>();
   const {
     characters,
     data,
-    error,
     isFetching,
     isFetchingCharacters,
     keyExtractor,
@@ -23,7 +35,7 @@ export default function HomeScreen() {
       headerBackgroundColor={{ light: "black", dark: "white" }}
       headerImage={
         <Image
-          source={require("@/assets/images/marvel-background.png")}
+          source={marvelBgIcon}
           style={StyleSheet.absoluteFillObject}
           placeholder="marvel-background"
           contentFit="scale-down"
@@ -53,9 +65,11 @@ export default function HomeScreen() {
         ListFooterComponent={
           isFetching && !data?.length ? (
             <ListCardSkeleton skeletonNumber={10} />
-          ) : (
-            <WatchMoreCard handlePressCard={() => router.push("/comics")} />
-          )
+          ) : data?.length ? (
+            <WatchMoreCard
+              handlePressCard={() => navigation.navigate("comics")}
+            />
+          ) : null
         }
         horizontal
       />
@@ -73,13 +87,15 @@ export default function HomeScreen() {
         ListFooterComponent={
           isFetchingCharacters && !characters?.length ? (
             <ListCardSkeleton skeletonNumber={10} />
-          ) : (
-            <WatchMoreCard handlePressCard={() => router.push("/characters")} />
-          )
+          ) : characters?.length ? (
+            <WatchMoreCard
+              handlePressCard={() => navigation.navigate("characters")}
+            />
+          ) : null
         }
         horizontal
       />
-      <Box style={{ height: 100 }} />
+      <Box style={styles.separator} />
     </ParallaxScrollView>
   );
 }
@@ -96,5 +112,6 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     position: "absolute"
-  }
+  },
+  separator: { height: 100 }
 });

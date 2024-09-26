@@ -5,20 +5,22 @@ import { StyleSheet } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useQuery } from "@tanstack/react-query";
 
-import { Box, ComicCard, Typography } from "@/components";
+import { Box, ComicCard, Typography } from "@/shared/infrastructure/components";
 
-import { homeAPI } from "./services";
-import { HomeCharacterMapped, HomeComicsMaped } from "./models";
-import { apiToHomeCharacters, apiToHomeComics } from "./adapters";
+import { createAxiosRepository } from "./infrastructure/axios.repository";
+import { createComicsService } from "./application/comics";
+import { createCharactersService } from "./application/characters";
+import { MarvelComic } from "./domain/comics";
+import { MarvelCharacter } from "./domain/character";
+
+const repository = createAxiosRepository();
+const comicsService = createComicsService(repository);
+const charactersService = createCharactersService(repository);
 
 export const useHome = () => {
   const { data, error, refetch, isFetching } = useQuery({
     queryKey: ["lastWeekComics"],
-    queryFn: homeAPI.fetchLastWeekComics,
-    select: (data) => {
-      const charactersMapped = apiToHomeComics(data.results);
-      return charactersMapped;
-    },
+    queryFn: comicsService.geLastWeekComics,
     enabled: false
   });
 
@@ -29,15 +31,11 @@ export const useHome = () => {
     isFetching: isFetchingCharacters
   } = useQuery({
     queryKey: ["firstCharacters"],
-    queryFn: homeAPI.fetchCharacters,
-    select: (data) => {
-      const charactersMapped = apiToHomeCharacters(data.results);
-      return charactersMapped;
-    },
+    queryFn: charactersService.getCharacters,
     enabled: false
   });
 
-  const renderItem = ({ item }: { item: HomeComicsMaped }) => (
+  const renderItem = ({ item }: { item: MarvelComic }) => (
     <Box style={{ width: 250 }}>
       <ComicCard
         id={item.id}
@@ -70,7 +68,7 @@ export const useHome = () => {
     </Box>
   );
 
-  const renderCharacterItem = ({ item }: { item: HomeCharacterMapped }) => (
+  const renderCharacterItem = ({ item }: { item: MarvelCharacter }) => (
     <Box style={{ width: 250 }}>
       <ComicCard
         id={item.id}
@@ -91,9 +89,8 @@ export const useHome = () => {
     </Box>
   );
 
-  const keyExtractor = (item: HomeComicsMaped) => item.id.toString();
-  const keyCharacterExtractor = (item: HomeCharacterMapped) =>
-    item.id.toString();
+  const keyExtractor = (item: MarvelComic) => item.id.toString();
+  const keyCharacterExtractor = (item: MarvelCharacter) => item.id.toString();
 
   useFocusEffect(
     React.useCallback(() => {

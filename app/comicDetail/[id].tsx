@@ -11,17 +11,17 @@ import {
   ListEmpty,
   ParallaxScrollView,
   Typography
-} from "@/components";
+} from "@/shared/infrastructure/components";
 
 import {
   ComicInfo,
   ComicInfoSkeleton,
   InfoCardSkeletons,
   ThumbnailsSkeletons
-} from "./components";
-import { useComicDetail } from "./useComicDetail";
+} from "./infrastructure/components";
+import { useComicDetail } from "./infrastructure/useComicDetail";
 
-const ComicModal = React.lazy(() => import("./components/comicModal"));
+const ComicModal = React.lazy(() => import("./infrastructure/components/comicModal"));
 
 const ComicDetail = () => {
   const navigation = useNavigation();

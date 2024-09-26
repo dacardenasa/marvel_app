@@ -1,22 +1,31 @@
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 
-import { Box, Container, CustomTabs, ListEmpty } from "@/components";
+import {
+  Box,
+  Container,
+  CustomTabs,
+  ListEmpty
+} from "@/shared/infrastructure/components";
 
-import { ComicCardsSkeleton, SearchButtons, SearchModal } from "./components";
-import { useSearch } from "./useSearch";
-import { SearchCategories, Tabs } from "./models";
+import {
+  ComicCardsSkeleton,
+  SearchButtons,
+  SearchModal
+} from "./infrastructure/components";
+import { useSearch } from "./infrastructure/useSearch";
+import { SearchCategories, SearchTabs } from "./domain/search";
 
 export default function Search() {
   const {
     fetchMoreCharactersData,
     fetchMoreDataComics,
+    handleFetchCharacters,
+    handleFetchComics,
     handleSearchBy,
     handleToggleModal,
     keyExtractorCharacters,
     keyExtractorComic,
-    refetchCharacters,
-    refetchComics,
     renderCharacterItem,
     renderComicItem,
     characters,
@@ -39,7 +48,7 @@ export default function Search() {
           handleToggleModal();
         }}
       />
-      <CustomTabs<Tabs>
+      <CustomTabs<SearchTabs>
         activeTab={searchBy}
         tabs={{
           comics: SearchCategories.comics,
@@ -98,28 +107,14 @@ export default function Search() {
           }
         }}
       />
-      {isOpenModal && searchBy === SearchCategories.comics && (
-        <SearchModal
-          isVisible={isOpenModal}
-          closeModal={handleToggleModal}
-          type={searchBy}
-          handleFetchComics={() => {
-            refetchComics();
-            handleToggleModal();
-          }}
-        />
-      )}
-      {isOpenModal && searchBy === SearchCategories.characters && (
-        <SearchModal
-          isVisible={isOpenModal}
-          closeModal={handleToggleModal}
-          type={searchBy}
-          handleFetchCharacters={() => {
-            refetchCharacters();
-            handleToggleModal();
-          }}
-        />
-      )}
+      <SearchModal
+        isVisible={isOpenModal}
+        closeModal={handleToggleModal}
+        type={searchBy}
+        handleFetch={
+          searchBy === "comics" ? handleFetchComics : handleFetchCharacters
+        }
+      />
     </Container>
   );
 }

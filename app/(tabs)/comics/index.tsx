@@ -1,10 +1,10 @@
 import React from "react";
 import { FlatList, ScrollView, StyleSheet } from "react-native";
 
-import { Container, ErrorView } from "@/components";
+import { Container, ErrorView } from "@/shared/infrastructure/components";
 
-import { useComics } from "./useComics";
-import { ComicCardsSkeleton } from "./components";
+import { useComics } from "./infrastructure/useComics";
+import { ComicCardsSkeleton } from "./infrastructure/components";
 
 const Comics = () => {
   const {
