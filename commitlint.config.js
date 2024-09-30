@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 module.exports = {
   /*
    * Resolve and load @commitlint/config-conventional from node_modules.
