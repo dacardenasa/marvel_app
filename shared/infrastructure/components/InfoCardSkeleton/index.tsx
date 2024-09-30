@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
 
-import { Box, SkeletonBox } from "@/shared/infrastructure/components";
+import { Box } from "../Box";
+import { SkeletonBox } from "../SkeletonBox";
 
 export const InfoCardSkeleton = () => {
   return (
