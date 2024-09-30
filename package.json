@@ -10,7 +10,9 @@
     "web": "expo start --web",
     "coverage": "jest --coverage",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "commit": "git-cz",
+    "prepare": "husky"
   },
   "jest": {
     "projects": [
@@ -61,6 +63,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
+    "@commitlint/cli": "^19.5.0",
+    "@commitlint/config-conventional": "^19.5.0",
     "@testing-library/jest-native": "^5.4.3",
     "@testing-library/react-native": "^12.6.1",
     "@types/jest": "^29.5.12",
@@ -68,16 +72,31 @@
     "@types/react-test-renderer": "^18.0.7",
     "@typescript-eslint/eslint-plugin": "^8.6.0",
     "@typescript-eslint/parser": "^8.6.0",
+    "commitizen": "^4.3.1",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.57.0",
     "eslint-config-expo": "^7.1.2",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.36.1",
     "eslint-plugin-testing-library": "^6.3.0",
+    "husky": "^9.1.6",
     "jest": "^29.2.1",
     "jest-expo": "~51.0.4",
+    "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "react-test-renderer": "18.2.0",
     "typescript": "~5.3.3"
+  },
+  "lint-staged": {
+    "*.{js, jsx,ts,tsx}": [
+      "npm run lint",
+      "npm run jest --findRelatedTests --bail"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "private": true
 }
