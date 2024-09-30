@@ -8,11 +8,30 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "coverage": "jest --coverage",
     "test": "jest --watchAll",
     "lint": "expo lint"
   },
   "jest": {
-    "preset": "jest-expo"
+    "projects": [
+      {
+        "preset": "jest-expo/ios"
+      },
+      {
+        "preset": "jest-expo/android"
+      }
+    ],
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/*.{ts,tsx,js,jsx}",
+      "!**/coverage/**",
+      "!**/app/**/domain/**",
+      "!**/node_modules/**",
+      "!**/babel.config.js",
+      "!**/eslintrc.js",
+      "!**/expo-env.d.ts",
+      "!**/.expo/**"
+    ]
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",

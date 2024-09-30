@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
-
-import { Box, Typography } from "@/shared/infrastructure/components";
 import { Pressable, StyleSheet } from "react-native";
 
 import uuid from "react-native-uuid";
+
+import { Box } from "../Box";
+import { Typography } from "../Typography";
+
 
 type CustomTabsProps<T> = {
   activeTab: keyof T;

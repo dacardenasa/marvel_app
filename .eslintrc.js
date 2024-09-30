@@ -28,5 +28,10 @@ module.exports = {
   plugins: ["@typescript-eslint", "react"],
   rules: {
     "import/no-commonjs": "off"
+  },
+  settings: {
+    react: {
+      version: "detect"
+    }
   }
 };
